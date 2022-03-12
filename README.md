@@ -3,4 +3,4 @@ Presento un proyecto como este hecho en aprox. 2 semanas habiles, el proyecto co
 
 Subo el codigo fuente Desarrollado por mi (Mott/Xerbuff) para aquellos que estan realmente perdidos y quieren un ejemplo mas claro y poco complejo de una pagina web dinamica
 
-PD: A nivel white hat se podrian observar muchas vulnerabilidades, en caso de que detectes una actualmente gracias a este Repositorio, no olvides darle una estrella
+PD: A nivel white box se podrian observar muchas vulnerabilidades, en caso de que detectes una actualmente gracias a este Repositorio, no olvides darle una estrella
