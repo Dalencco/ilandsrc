@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include ('partials/head.ejs') %> 
+    <meta name="description" content="Admin | Pagina web Oficial de Dazack">
+    <title>iLand | Admin</title>
+</head>
+<body class="bg-black">
+
+    <nav class="backgroundes py-6 fixed relative">
+        <div class="container mx-auto flex px-8 xl:px-0">
+          <div class="flex flex-grow items-center">
+            <a href="/"><img src="<%- include ('partials/img.ejs') %>" width="50" alt=""></a>
+          </div>
+          <div class="flex lg:hidden">
+            <i class="text-white fas fa-bars fa-2x" onclick="Menu();"></i>
+          </div>
+          <div id="menu" class="z-10 lg:flex hidden flex-grow justify-between absolute lg:relative lg:top-0 top-20 left-0
+               backgroundes w-full py-14 lg:py-0 px-8 items-center sm:px-24">
+            <div class="flex flex-col lg:flex-row mb-8 lg:mb-0">
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/">Inicio</a>
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/profile">Perfil</a>
+              <% if (user.roles == "Admin") { %>
+                <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/admin/create/news">News</a> 
+                <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/admin/users/premium">Premiums</a> 
+              <% } else if (user.roles == "Mod") { %>
+
+              <% } %>
+          </div>
+          <div class="flex flex-col lg:flex-row text-center">
+              <a class="text-white border border-gray-400 py-2.5 px-5 rounded-md hover:text-black hover:border-white hover:bg-white transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/admin/users">Usuarios</a>
+              <a class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 py-2.5 px-5 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out" href="/admin/blogs">Blogs</a>
+          </div>
+        </div>
+        </div>
+      </nav>
+
+      
+
+    <%- include ('partials/footer.ejs') %> 
+</body>
+</html>

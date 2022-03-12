@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include ('partials/head.ejs') %> 
+    <meta name="og:title" content="<%= user.user %> ">
+    <meta name="og:image" content="<%= user.image %> ">
+    <meta name="description" content="Perfil de <%= user.user %>  | <%= user.bio %>">
+    <title>iLand | <%= user.user %> </title>
+</head>
+<body class="bg-black">
+    <nav class="backgroundes py-6 fixed relative">
+        <div class="container mx-auto flex px-8 xl:px-0">
+          <div class="flex flex-grow items-center">
+            <a href="/"><img src="<%- include ('partials/img.ejs') %>" width="50" alt=""></a>
+          </div>
+          <div class="flex lg:hidden">
+            <i class="text-white fas fa-bars fa-2x" onclick="Menu();"></i>
+          </div>
+          <div id="menu" class="z-10 lg:flex hidden flex-grow justify-between absolute lg:relative lg:top-0 top-20 left-0
+               backgroundes w-full py-14 lg:py-0 px-8 items-center sm:px-24">
+            <div class="flex flex-col lg:flex-row mb-8 lg:mb-0">
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/">Inicio</a>
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/users">Usuarios</a>
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/blogs">Blogs</a>
+          </div>
+          <div class="flex flex-col lg:flex-row text-center">
+              <% if (auth) { %>
+                  <a class="text-white border border-gray-400 py-2.5 px-5 rounded-md hover:text-black hover:border-white hover:bg-white transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/profile">Perfil</a>
+                  <a class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 py-2.5 px-5 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out" href="/news">Noticias</a>
+              <% } else {%>
+                  <a class="text-white border border-gray-400 py-2.5 px-5 rounded-md hover:text-black hover:border-white hover:bg-white transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/register">Registrate</a>
+                  <a class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 py-2.5 px-5 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out" href="/login">Login</a>
+              <% } %>
+          </div>
+        </div>
+        </div>
+      </nav>
+
+      <div class="p-32">
+        <h1 class="text-center font-bold hover:text-blue-500 text-gray-800 transition duration-200 lg:text-5xl md:text-3xl mb-2">Perfil de <%= user.user %> </h1>
+    </div>  
+
+      <section class="backgroundes py-8 text-white">
+        <div class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+          <div class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-black opacity-75 mx-6 lg:mx-0">
+            <div class="p-4 md:p-12 text-center lg:text-left">
+              <div>
+                <img class="lg:hidden w-full h-full" src="<%= user.banner %> ">
+              </div>
+              <div class="block lg:hidden -mt-16">
+                <img src="<%= user.image %> " class="h-48 w-48 rounded-full shadow-xl mx-auto">
+              </div>
+              
+              <h1 class="text-3xl font-bold pt-8 lg:pt-0"><%= user.user %> </h1>
+              <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-indigo-700 opacity-25"></div>
+              Roles: 
+              <% if (user.premium.end == "false") { %>
+              
+              <% } else { %>
+                <div class="tooltip">
+                  <span class="text-xs inline-block mt-3 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full"><i class="fas fa-gem"></i></span>
+                  <span class="tooltiptext">Premium</span>
+                </div>                  
+              <% } %> 
+              <% if (user.roles == "user") { %>
+                <div class="tooltip">
+                  <span class="text-xs inline-block mt-3 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-purple-600 text-white rounded-full"><i class="fas fa-user"></i></span>
+                  <span class="tooltiptext">User</span>
+                </div>
+              <% } else if (user.roles == "Admin") { %> 
+                <div class="tooltip">
+                  <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-800 text-white rounded-full"><i class="fas fa-code"></i></span>
+                  <span class="tooltiptext">Developer</span>
+                </div>
+              <% } else if (user.roles == "Mod") { %> 
+                <div class="tooltip">
+                  <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-800 text-white rounded-full"><i class="fas fa-shield-alt"></i></span>
+                  <span class="tooltiptext">Mod</span>
+                </div>
+              <% } %> 
+              <p class="pt-2 text-xs lg:text-sm flex items-center justify-center lg:justify-start">Rango: <span class="text-xs inline-block ml-1 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-800 text-white rounded-full"><%= user.rango %></span></p>
+              <p class="pt-2 text-xs lg:text-sm flex items-center justify-center lg:justify-start">Se unio el: <%= user.joined %> </p>
+              <% if (user.premium.end == "false") { %>
+              
+                <% } else { %>
+                  <p class="pt-2 text-xs lg:text-sm flex items-center justify-center lg:justify-start">Premium vence el: <%= user.premium.end %> </p>                
+                <% } %> 
+              <p class="pt-8 text-sm"><%= user.bio %> </p>
+              
+            </div>
+          </div>
+
+          <div class="w-full lg:w-2/5">
+            <img src="<%= user.banner %> " class="w-full rounded-none lg:rounded-lg shadow-2xl hidden lg:block object-center object-cover">
+            <img src="<%= user.image %> " class="w-full rounded-none lg:rounded-lg shadow-2xl hidden lg:block object-center object-cover"> 
+          </div>
+        </div>
+      </section>
+
+      <%- include ('partials/footer.ejs') %>
+</body>
+</html>

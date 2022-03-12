@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+
+        <!–– BASE ––>
+    
+        <%- include ('partials/head.ejs') %> 
+        <meta name="description" content="Pagina web Oficial de Dazack">
+        <title>iLand</title>
+    </head>
+<body class="bg-black">
+
+    <!–– NAVEGACION ––>
+    
+    <nav class="backgroundes py-6 fixed relative">
+      <div class="container mx-auto flex px-8 xl:px-0">
+        <div class="flex flex-grow items-center">
+          <a href="/"><img src="<%- include ('partials/img.ejs') %>" width="50" alt=""></a>
+        </div>
+        <div class="flex lg:hidden">
+          <i class="text-white fas fa-bars fa-2x" onclick="Menu();"></i>
+        </div>
+        <div id="menu" class="z-10 lg:flex hidden flex-grow justify-between absolute lg:relative lg:top-0 top-20 left-0
+             backgroundes w-full py-14 lg:py-0 px-8 items-center sm:px-24">
+          <div class="flex flex-col lg:flex-row mb-8 lg:mb-0">
+            <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/">Inicio</a>
+            <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/users">Usuarios</a>
+            <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/blogs">Blogs</a>
+        </div>
+        <div class="flex flex-col lg:flex-row text-center">
+            <% if (auth) { %>
+                <a class="text-white border border-gray-400 py-2.5 px-5 rounded-md hover:text-black hover:border-white hover:bg-white transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/profile">Perfil</a>
+                <a class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 py-2.5 px-5 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out" href="/news">Noticias</a>
+            <% } else {%>
+                <a class="text-white border border-gray-400 py-2.5 px-5 rounded-md hover:text-black hover:border-white hover:bg-white transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/register">Registrate</a>
+                <a class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 py-2.5 px-5 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out" href="/login">Login</a>
+            <% } %>
+        </div>
+      </div>
+      </div>
+    </nav>
+
+    <!–– TITULO ––>
+
+    <div class="p-32">
+        <h1 class="text-center font-bold hover:text-blue-500 text-gray-800 transition duration-200 lg:text-5xl md:text-3xl mb-2">¡Premium ahora!</h1>
+    </div>  
+
+    <section class="backgroundes">
+        <style>
+            @import url(https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css);
+        </style>
+        <div class="w-full mx-auto px-5 py-10 text-gray-600 mb-10">
+            <div class="max-w-5xl mx-auto md:flex">
+                <div class="md:w-1/4 md:flex md:flex-col">
+                    <div class="text-left w-full flex-grow md:pr-5">
+                        <h1 class="text-4xl font-bold mb-5">Precio</h1>
+                        <h3 class="text-md font-medium mb-5">Tenga en cuenta que todo es mensual, mas en <a class="font-bold hover:text-blue-500 transition duration-200" href="/runp">RUNP</a>*</h3>
+                    </div>
+                    <div class="w-full mb-2">
+                        <p class="text-xs">*Se aplica la RUNP</p>
+                    </div>
+                </div>
+                <div class="md:w-3/4">
+                    <div class="max-w-4xl mx-auto md:flex">
+                        <div class="w-full md:w-1/3 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-2 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
+                            <div class="w-full flex-grow">
+                                <h2 class="text-center font-bold uppercase mb-4">PERSONAL</h2>
+                                <h3 class="text-center font-bold text-4xl mb-5">$0.99<span class="text-sm">/mo</span></h3>
+                                <ul class="text-sm mb-8">
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> Banner GIF</li>
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> Imagen GIF</li>
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> 10 Blogs</li>
+                                </ul>
+                            </div>
+                            <div class="w-full">
+                                <button class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out font-bold px-10 py-2 w-full">Obtener</button>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:-mx-3 md:mb-0 rounded-md shadow-lg shadow-gray-600 md:relative md:z-50 md:flex md:flex-col">
+                            <div class="w-full flex-grow">
+                                <h2 class="text-center font-bold uppercase mb-4">TEAM</h2>
+                                <h3 class="text-center font-bold text-4xl md:text-5xl mb-5">$2.99<span class="text-sm">/mo</span></h3>
+                                <ul class="text-sm mb-8">
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> Banner GIF</li>
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> Imagen GIF</li>
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> Un Premium</li>
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> 25 Blogs</li>
+                                </ul>
+                            </div>
+                            <div class="w-full">
+                                <button class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out font-bold px-10 py-2 w-full">Obtener</button>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-2 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
+                            <div class="w-full flex-grow">
+                                <h2 class="text-center font-bold uppercase mb-4">PRO</h2>
+                                <h3 class="text-center font-bold text-4xl mb-5">$4.99<span class="text-sm">/mo</span></h3>
+                                <ul class="text-sm mb-8">
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> Banner GIF</li>
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> Imagen GIF</li>
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> 2 Premium</li>
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> 35 Blogs</li>
+                                    <li class="leading-tight"><i class="mdi mdi-check-bold text-lg"></i> Beta Access</li>
+                                </ul>
+                            </div>
+                            <div class="w-full">
+                                <button class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out font-bold px-10 py-2 w-full">Obtener</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <%- include ('partials/footer.ejs') %> 
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include ('partials/head.ejs') %>
+        <meta name="description" content="Noticias | Pagina web Oficial de Dazack">
+        <title>iLand | Noticias</title>
+</head>
+
+<body class="bg-black">
+
+    <nav class="backgroundes py-6 fixed relative">
+        <div class="container mx-auto flex px-8 xl:px-0">
+            <div class="flex flex-grow items-center">
+                <a href="/"><img src="<%- include ('partials/img.ejs') %>" width="50" alt=""></a>
+            </div>
+            <div class="flex lg:hidden">
+                <i class="text-white fas fa-bars fa-2x" onclick="Menu();"></i>
+            </div>
+            <div id="menu" class="z-10 lg:flex hidden flex-grow justify-between absolute lg:relative lg:top-0 top-20 left-0
+               backgroundes w-full py-14 lg:py-0 px-8 items-center sm:px-24">
+                <div class="flex flex-col lg:flex-row mb-8 lg:mb-0">
+                    <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/">Inicio</a>
+                    <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0"
+                        href="/users">Usuarios</a>
+                    <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0"
+                        href="/blogs">Blogs</a>
+                </div>
+                <div class="flex flex-col lg:flex-row text-center">
+                    <a class="text-white border border-gray-400 py-2.5 px-5 rounded-md hover:text-black hover:border-white hover:bg-white transition duration-200 lg:mr-7 mb-8 lg:mb-0"
+                        href="/profile">Perfil</a>
+                    <a class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 py-2.5 px-5 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out"
+                        href="/premium">Premium</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="p-32">
+        <h1
+            class="text-center font-bold hover:text-blue-500 text-gray-800 transition duration-200 lg:text-5xl md:text-3xl mb-2">
+            ¡Noticias!</h1>
+    </div>
+
+    <section class="p-32 backgroundes">
+        <div class="mb-12">
+            <h1
+                class="text-4xl md:text-6xl text-gray-700 font-semibold hover:text-blue-500 transition duration-200 text-center">
+                Noticias Globales</h1>
+            <% if (gnews.length> 0) { %>
+                        <% gnews.forEach(function(g) { %>
+                            <div class="mt-4 flex flex-col">
+                                <div class="flex flex-col py-3 px-3 w-auto inline-block overflow-y-auto overflow-hidden bg-gray-100">
+                                    <div class="shadow-lg">
+                                        <div class="pt-3 pb-4 ">
+                                            <div class="block bg-white py-3 border-t">
+                                                <div class="px-4 py-2 flex  justify-between">
+                                                    <span>Asunto: <%= g.name %> </span>
+                                                    <div>
+                                                        <span class="text-sm font-semibold px-4 py-1 text-gray-800 rounded-full bg-green-300">Activo</span>    
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="shadow-lg pt-4 ml-2 mr-2 rounded-lg">
+                                            <div class="block bg-white py-3 border-t pb-4">
+                                                <div class="px-4 py-2 flex  justify-between">
+                                                    <span class="text-sm font-semibold text-gray-900">Staff</span>
+                                                    <div class="flex">
+                                                        <img class="h-6 w-6 rounded-full object-cover" src="<%- include ('partials/img.ejs') %> ">
+                                                    </div>
+                                                </div>
+                                                <p class="px-4 py-2 text-sm font-semibold text-gray-700"><%= g.descripcion %>  </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                            <% }) %>
+                    </div>
+                </div>
+        </div>
+        <% } else { %>
+            <h5 class="text-base md:text-lg text-white mt-4 mb-4 text-center">Parece que no hay noticias por aqui</h5>
+            <% } %>
+                <div class="mb-12">
+                    <h1 class="text-4xl md:text-6xl text-gray-700 font-semibold hover:text-blue-500 transition duration-200 text-center">Noticias Personales</h1>
+                    <% if (pnews.length > 0) { %>
+                                <% pnews.forEach(function(p) { %>
+                                    <div class="mt-4 flex flex-col">
+                                        <div class="flex flex-col py-3 px-3 w-auto inline-block overflow-y-auto overflow-hidden bg-gray-100">
+                                            <div class="shadow-lg">
+                                                <div class="pt-3 pb-4 ">
+                                                    <div class="block bg-white py-3 border-t">
+                                                        <div class="px-4 py-2 flex justify-between">
+                                                            <span>Asunto: <%= p.name %> </span>
+                                                            <div>
+                                                                <span class="text-sm font-semibold px-4 py-1 text-gray-800 rounded-full bg-green-300">Activo</span>    
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="shadow-lg pt-4 ml-2 mr-2 rounded-lg">
+                                                    <div class="block bg-white py-3 border-t pb-4">
+                                                        <div class="px-4 py-2 flex justify-between">
+                                                            <span class="text-sm font-semibold text-gray-900">Support</span>
+                                                            <div class="flex">
+                                                                <img class="h-6 w-6 rounded-full object-cover" src="<%- include ('partials/img.ejs') %> ">
+                                                            </div>
+                                                        </div>
+                                                        <p class="px-4 py-2 text-sm font-semibold text-gray-700"><%= p.descripcion %>  </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </main>
+                                <% }) %>
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <h5 class="text-base md:text-lg text-white mt-4 mb-4 text-center">Parece que no tienes
+                                Noticias, nos alegramos de que te hayas portado bien</h5>
+                        <% } %>
+    </section>
+
+    <%- include ('partials/footer.ejs') %>
+</body>
+
+</html>

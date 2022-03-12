@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    
+        <%- include ('partials/head.ejs') %> 
+        <meta name="description" content="Pagina web Oficial de Dazack">
+        <title>iLand | Codes</title>
+    </head>
+<body class="bg-black">
+
+    <nav class="backgroundes py-6 fixed relative">
+        <div class="container mx-auto flex px-8 xl:px-0">
+          <div class="flex flex-grow items-center">
+            <a href="/"><img src="<%- include ('partials/img.ejs') %>" width="50" alt=""></a>
+          </div>
+          <div class="flex lg:hidden">
+            <i class="text-white fas fa-bars fa-2x" onclick="Menu();"></i>
+          </div>
+          <div id="menu" class="z-10 lg:flex hidden flex-grow justify-between absolute lg:relative lg:top-0 top-20 left-0
+               backgroundes w-full py-14 lg:py-0 px-8 items-center sm:px-24">
+            <div class="flex flex-col lg:flex-row mb-8 lg:mb-0">
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/">Inicio</a>
+              <% if (user.roles == "Admin" || user.roles == "Mod") { %>
+                <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/admin">Admin</a>
+              <% } %>
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/create/blog">Crear Blog</a>
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/premium">Premium</a>
+          </div>
+          <div class="flex flex-col lg:flex-row text-center">
+            <a class="text-white border border-gray-400 py-2.5 px-5 rounded-md hover:text-black hover:border-white hover:bg-white transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/edit/profile">Editar</a>
+            <a class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 py-2.5 px-5 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out" href="/logout">Logout</a> 
+          </div>
+        </div>
+        </div>
+      </nav>
+
+    <div class="p-32">
+        <h1 class="text-center font-bold hover:text-blue-500 text-gray-800 transition duration-200 lg:text-5xl md:text-3xl mb-2">Codes</h1>
+    </div> 
+
+    <section class="backgroundes">
+        <% if (ycodes.length > 0) { %>
+            <div class="table w-full p-2 py-4 px-4">
+                <table class="w-full border">
+                    <thead>
+                        <tr class="bg-gray-50 border-b">
+                            <th class="p-2 border-r text-sm font-thin text-gray-500">
+                                <div class="flex items-center justify-center">
+                                    Link
+                                </div>
+                            </th>
+                            <th class="p-2 border-r text-sm font-thin text-gray-500">
+                                <div class="flex items-center justify-center">
+                                    Accion
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% ycodes.forEach(function(code) { %>
+                            <tr class="bg-gray-100 text-center border-b text-sm text-gray-600">
+                                <td class="p-2 border-r"><%= code.slug %> </td>
+                                <td>
+                                    <a href="/premium/getcode/<%= code.slug %> " class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Ir</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } else { %>
+            <div class="px-5 py-5">
+                <h1 class="text-center font-bold text-blue-500 transition duration-200 lg:text-1xl md:text-2xl mb-2">No tienes Codes</h1>
+            </div>
+        <% } %> 
+    </section>
+
+    <%- include ('partials/footer.ejs') %> 
+
+</body>
+</html>

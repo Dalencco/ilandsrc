@@ -1,0 +1,7 @@
+db.json
+package-lock.json
+users.json
+node_modules
+src/config/config.js
+src/public/css/main.css
+src/public/css/style.css

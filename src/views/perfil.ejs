@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include ('partials/head.ejs') %> 
+    <meta name="description" content="Tu Perfil | Pagina web Oficial de Dazack">
+    <title>iLand | Tu Perfil</title>
+</head>
+<body class="bg-black">
+    <nav class="backgroundes py-6 fixed relative">
+        <div class="container mx-auto flex px-8 xl:px-0">
+          <div class="flex flex-grow items-center">
+            <a href="/"><img src="<%- include ('partials/img.ejs') %>" width="50" alt=""></a>
+          </div>
+          <div class="flex lg:hidden">
+            <i class="text-white fas fa-bars fa-2x" onclick="Menu();"></i>
+          </div>
+          <div id="menu" class="z-10 lg:flex hidden flex-grow justify-between absolute lg:relative lg:top-0 top-20 left-0
+               backgroundes w-full py-14 lg:py-0 px-8 items-center sm:px-24">
+            <div class="flex flex-col lg:flex-row mb-8 lg:mb-0">
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/">Inicio</a>
+              <% if (user.roles == "Admin" || user.roles == "Mod") { %>
+                <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/admin">Admin</a>
+              <% } %>
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/create/blog">Crear Blog</a>
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/premium">Premium</a>
+          </div>
+          <div class="flex flex-col lg:flex-row text-center">
+            <a class="text-white border border-gray-400 py-2.5 px-5 rounded-md hover:text-black hover:border-white hover:bg-white transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/edit/profile">Editar</a>
+            <a class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 py-2.5 px-5 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out" href="/logout">Logout</a> 
+          </div>
+        </div>
+        </div>
+      </nav>
+
+      <div class="p-32">
+        <h1 class="text-center font-bold hover:text-blue-500 text-gray-800 transition duration-200 lg:text-5xl md:text-3xl mb-2">Tu Perfil</h1>
+    </div>  
+
+      <section class="backgroundes py-8 text-white">
+        <div class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+          <div class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-black opacity-75 mx-6 lg:mx-0">
+            <div class="p-4 md:p-12 text-center lg:text-left">
+              <div>
+                <img class="lg:hidden w-full h-full" src="<%= user.banner %> ">
+              </div>
+              <div class="block lg:hidden -mt-16">
+                <img src="<%= user.image %> " class="h-48 w-48 rounded-full shadow-xl mx-auto">
+              </div>
+              
+              <h1 class="text-3xl font-bold pt-8 lg:pt-0"><%= user.user %> </h1>
+              <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-indigo-700 opacity-25"></div>
+              Roles: 
+              <% if (user.premium.end == "false") { %>
+               
+              <% } else { %>
+                <div class="tooltip">
+                  <span class="text-xs inline-block mt-3 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full"><i class="fas fa-gem"></i></span>
+                  <span class="tooltiptext">Premium</span>
+                </div>               
+              <% } %> 
+              <% if (user.roles == "user") { %>
+                  <span class="text-xs inline-block mt-3 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-purple-600 text-white rounded-full"><i class="fas fa-user"></i></span>
+              <% } else if (user.roles == "Admin") { %> 
+                <div class="tooltip">
+                  <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-800 text-white rounded-full"><i class="fas fa-code"></i></span>
+                  <span class="tooltiptext">Developer</span>
+                </div>
+              <% } else if (user.roles == "Mod") { %> 
+                <div class="tooltip">
+                  <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-800 text-white rounded-full"><i class="fas fa-shield-alt"></i></span>
+                  <span class="tooltiptext">Mod</span>
+                </div>
+              <% } %> 
+              <p class="pt-2 text-xs lg:text-sm flex items-center justify-center lg:justify-start">Rango: <span class="text-xs inline-block ml-1 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-800 text-white rounded-full"><%= user.rango %> </span></p>
+              <p class="pt-2 text-xs lg:text-sm flex items-center justify-center lg:justify-start">Email: <%= user.email %> </p>
+              <p class="pt-2 text-xs lg:text-sm flex items-center justify-center lg:justify-start">Te uniste el: <%= user.joined %> </p>
+              <p class="pt-8 text-sm"><%= user.bio %> </p>
+              
+            </div>
+          </div>
+          <div class="w-full lg:w-2/5">
+            <img src="<%= user.banner %> " class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block object-cover">
+            <img src="<%= user.image %> " class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block object-cover"> 
+          </div>
+        </div>
+      </section>
+
+      <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-wrap w-full mb-8">
+          <div class="w-full mb-6 lg:mb-0">
+            <h1 class="sm:text-4xl text-5xl font-medium title-font mb-2 text-white">Estadisticas</h1>
+            <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+          </div>
+        </div>
+        <div class="flex flex-wrap -m-4 text-center">
+          <div class="p-4 sm:w-1/4 w-1/2">
+            <div class="bg-indigo-500 rounded-lg p-2 xl:p-6">
+                <% if (user.premium.end == "false") { %>
+                  <h2 class="title-font font-medium sm:text-4xl text-3xl text-white">No Premium</h2>
+                <% } else if (user.premium.end) { %>
+                  <h2 class="title-font font-medium sm:text-1xl text-2xl text-white"><%= user.premium.end %> </h2>
+                <% } %> 
+                <p class="leading-relaxed text-gray-100 font-bold">Premium</p>
+            </div>
+          </div>
+          <div class="p-4 sm:w-1/4 w-1/2">
+            <div class="bg-indigo-500 rounded-lg p-2 xl:p-6">
+                <h2 class="title-font font-medium sm:text-1xl text-2xl text-white"><%= user.premium.codes %> </h2>
+                <p class="leading-relaxed text-gray-100 font-bold">Premium Codes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!–– SCRIPTS ––>
+
+    <%- include ('partials/footer.ejs') %> 
+</body>
+</html>

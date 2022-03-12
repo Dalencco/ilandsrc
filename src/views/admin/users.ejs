@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include ('../partials/head.ejs') %> 
+    <meta name="description" content="Admin | Pagina web Oficial de Dazack">
+    <title>iLand | Admin</title>
+</head>
+<body class="bg-black">
+    
+    <nav class="backgroundes py-6 fixed relative">
+        <div class="container mx-auto flex px-8 xl:px-0">
+          <div class="flex flex-grow items-center">
+            <a href="/"><img src="<%- include ('../partials/img.ejs') %>" width="50" alt=""></a>
+          </div>
+          <div class="flex lg:hidden">
+            <i class="text-white fas fa-bars fa-2x" onclick="Menu();"></i>
+          </div>
+          <div id="menu" class="z-10 lg:flex hidden flex-grow justify-between absolute lg:relative lg:top-0 top-20 left-0
+               backgroundes w-full py-14 lg:py-0 px-8 items-center sm:px-24">
+            <div class="flex flex-col lg:flex-row mb-8 lg:mb-0">
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/">Inicio</a>
+              <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/profile">Perfil</a>
+              <% if (user.roles == "Admin") { %>
+                <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/admin/create/news">News</a> 
+                <a class="text-white hover:text-blue-500 transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/admin/users/premium">Premiums</a> 
+              <% } else if (user.roles == "Mod") { %>
+
+              <% } %>
+          </div>
+          <div class="flex flex-col lg:flex-row text-center">
+              <a class="text-white border border-gray-400 py-2.5 px-5 rounded-md hover:text-black hover:border-white hover:bg-white transition duration-200 lg:mr-7 mb-8 lg:mb-0" href="/admin/users">Usuarios</a>
+              <a class="text-white bg-indigo-700 border border-indigo-700 hover:border-blue-700 py-2.5 px-5 rounded-md hover:bg-blue-700 transition duration-200 ease-in-out" href="/admin/blogs">Blogs</a>
+          </div>
+        </div>
+        </div>
+      </nav>
+
+      <div class="p-32">
+        <h1 class="text-center font-bold hover:text-blue-500 text-gray-800 transition duration-200 lg:text-5xl md:text-3xl mb-2">Control de Usuarios </h1>
+    </div>  
+
+      <section class="p-20 backgroundes">
+<link
+href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+rel="stylesheet">
+<div class="flex items-center justify-center min-h-screen bg-gray-900">
+<div class="col-span-12">
+    <div class="overflow-auto lg:overflow-visible ">
+        <table class="table text-gray-400 border-separate space-y-6 text-sm">
+            <thead class="bg-gray-800 text-gray-500">
+                <tr>
+                    <th class="p-3">Info</th>
+                    <th class="p-3 text-left">IP</th>
+                    <th class="p-3 text-left">Premium</th>
+                    <th class="p-3 text-left">Status</th>
+                    <th class="p-3 text-left">Action</th>
+                </tr>
+            </thead>
+            <% users.forEach(function(user) { %>
+                <tbody>
+                    <tr class="bg-gray-800">
+                        <td class="p-3">
+                            <div class="flex align-items-center">
+                                <img class="rounded-full h-12 w-12 object-center object-cover" src="<%= user.image %> " alt="<%= user.user %> ">
+                                <div class="ml-3">
+                                    <div class=""><%= user.user %> </div>
+                                    <div class="text-gray-500"><%= user.email %> </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-3">
+                            <%= user.IP %> 
+                        </td>
+                        <td class="p-3 font-bold">
+                            <% if (user.premium.end == "false") { %>
+                                No
+                            <% } else { %>
+                                <%= user.premium.end %> 
+                            <% } %> 
+                        </td>
+                        <td class="p-3">
+                            <a href="/admin/users/roles/change/<%= user.id %>  " class="text-gray-400 hover:text-gray-100 mr-2">
+                                <i class="material-icons-outlined text-base"><i class="fas fa-shield-alt"></i></i>
+                            </a>
+                        </td>
+                        <td class="p-3 ">
+                            <a href="/user/<%= user.slug %> " class="text-gray-400 hover:text-gray-100 mr-2">
+                                <i class="material-icons-outlined text-base"><i class="fas fa-eye"></i></i>
+                            </a>
+                            <a href="/admin/users/premium/change/<%= user.id %> " class="text-gray-400 hover:text-green-500  mx-2">
+                                <i class="material-icons-outlined text-base"><i class="fas fa-edit"></i></i>
+                            </a>
+                            <a href="/admin/user/delete/<%= user.id %> " class="text-gray-400 hover:text-red-500  ml-2">
+                                <i class="material-icons-round text-base"><i class="fas fa-trash-alt"></i></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            <% }) %>
+        </table>
+    </div>
+</div>
+</div>
+<style>
+.table {
+    border-spacing: 0 15px;
+}
+
+i {
+    font-size: 1rem !important;
+}
+
+.table tr {
+    border-radius: 20px;
+}
+
+tr td:nth-child(n+5),
+tr th:nth-child(n+5) {
+    border-radius: 0 .625rem .625rem 0;
+}
+
+tr td:nth-child(1),
+tr th:nth-child(1) {
+    border-radius: .625rem 0 0 .625rem;
+}
+</style>
+      </section>
+
+      <%- include ('../partials/footer.ejs') %> 
+</body>
+</html>
